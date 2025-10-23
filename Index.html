@@ -3,363 +3,807 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathQuest - Game Matematika Seru</title>
+    <title>MathFun - Platform Belajar Matematika Interaktif</title>
     <link rel="stylesheet" href="index.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="screen active">
-        <div class="loading-container">
-            <div class="loading-animation">
-                <div class="math-symbol">➗</div>
-                <div class="math-symbol">✖️</div>
-                <div class="math-symbol">➕</div>
-                <div class="math-symbol">➖</div>
-            </div>
-            <h1>MathQuest</h1>
-            <p>Memuat petualangan matematika...</p>
-        </div>
-    </div>
-
-    <!-- Auth Screen -->
-    <div id="authScreen" class="screen">
-        <div class="auth-container">
-            <div class="auth-card">
-                <div class="auth-header">
-                    <h1>MathQuest</h1>
-                    <p>Petualangan Matematika Menanti!</p>
-                </div>
-
-                <div class="auth-tabs">
-                    <button class="auth-tab active" data-tab="login">Masuk</button>
-                    <button class="auth-tab" data-tab="register">Daftar</button>
-                </div>
-
-                <!-- Login Form -->
-                <form id="loginForm" class="auth-form active">
-                    <div class="input-group">
-                        <input type="email" id="loginEmail" placeholder=" " required>
-                        <label for="loginEmail">Email</label>
-                        <div class="input-icon">📧</div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <input type="password" id="loginPassword" placeholder=" " required>
-                        <label for="loginPassword">Password</label>
-                        <div class="input-icon">🔒</div>
-                    </div>
-
-                    <button type="submit" class="auth-btn">
-                        <span class="btn-text">Masuk ke Petualangan</span>
-                        <div class="btn-loader"></div>
-                    </button>
-
-                    <div class="auth-links">
-                        <a href="#" class="forgot-password">Lupa password?</a>
-                    </div>
-                </form>
-
-                <!-- Register Form -->
-                <form id="registerForm" class="auth-form">
-                    <div class="input-group">
-                        <input type="text" id="registerName" placeholder=" " required>
-                        <label for="registerName">Nama Lengkap</label>
-                        <div class="input-icon">👤</div>
-                    </div>
-
-                    <div class="input-group">
-                        <input type="email" id="registerEmail" placeholder=" " required>
-                        <label for="registerEmail">Email</label>
-                        <div class="input-icon">📧</div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <input type="password" id="registerPassword" placeholder=" " required>
-                        <label for="registerPassword">Password</label>
-                        <div class="input-icon">🔒</div>
-                    </div>
-
-                    <div class="input-group">
-                        <input type="password" id="registerConfirmPassword" placeholder=" " required>
-                        <label for="registerConfirmPassword">Konfirmasi Password</label>
-                        <div class="input-icon">✅</div>
-                    </div>
-
-                    <div class="terms">
-                        <input type="checkbox" id="agreeTerms" required>
-                        <label for="agreeTerms">Saya setuju dengan <a href="#">Syarat & Ketentuan</a></label>
-                    </div>
-
-                    <button type="submit" class="auth-btn">
-                        <span class="btn-text">Mulai Petualangan</span>
-                        <div class="btn-loader"></div>
-                    </button>
-                </form>
-
-                <div class="auth-footer">
-                    <p>Dengan mendaftar, kamu menyetujui petualangan matematika yang seru!</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Menu Screen -->
-    <div id="mainMenu" class="screen">
-        <!-- Animated Background -->
-        <div class="animated-bg">
-            <div class="floating-shape shape-1">🔺</div>
-            <div class="floating-shape shape-2">🔵</div>
-            <div class="floating-shape shape-3">⭐</div>
-            <div class="floating-shape shape-4">🔶</div>
-        </div>
-
-        <header class="header">
+    <!-- Premium Header -->
+    <header class="header premium-header">
+        <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <h1>MathQuest</h1>
-                    <span class="subtitle">Petualangan Matematika</span>
+                    <div class="logo-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>MathFun</h1>
+                        <span>by Education Group</span>
+                    </div>
                 </div>
                 
-                <div class="user-profile">
-                    <div class="profile-info">
-                        <div class="avatar" id="userAvatar">👤</div>
-                        <div class="user-details">
-                            <span class="user-name" id="userName">Player</span>
-                            <span class="user-level">Level: <span id="userLevel">1</span></span>
-                        </div>
+                <nav class="navigation">
+                    <div class="nav-main">
+                        <a href="#home" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Beranda</span>
+                        </a>
+                        <a href="#games" class="nav-link">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Permainan</span>
+                        </a>
+                        <a href="#curriculum" class="nav-link">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Kurikulum</span>
+                        </a>
+                        <a href="#progress" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Progress</span>
+                        </a>
+                        <a href="#parents" class="nav-link">
+                            <i class="fas fa-users"></i>
+                            <span>Orang Tua</span>
+                        </a>
                     </div>
-                    <div class="profile-stats">
-                        <div class="stat">
-                            <span class="stat-value" id="userScore">0</span>
-                            <span class="stat-label">Poin</span>
-                        </div>
-                        <button id="logoutBtn" class="logout-btn">🚪</button>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Cari permainan...">
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn-login">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Masuk</span>
+                        </button>
+                        <button class="btn-register">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Daftar Gratis</span>
+                        </button>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="global-progress">
+            <div class="container">
+                <div class="progress-info">
+                    <span>Hari Ini: <strong>1,245</strong> anak sedang belajar</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <main class="main-content">
-            <!-- Welcome Section -->
-            <section class="welcome-section">
-                <div class="welcome-card">
-                    <div class="welcome-content">
-                        <h2>Selamat Datang, <span id="welcomeName">Petualang</span>! 👋</h2>
-                        <p>Siap untuk tantangan matematika hari ini?</p>
-                        <div class="daily-stats">
-                            <div class="stat-item">
-                                <span class="stat-number" id="dailyPlayed">0</span>
-                                <span class="stat-text">Dimainkan Hari Ini</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number" id="dailyScore">0</span>
-                                <span class="stat-text">Poin Hari Ini</span>
-                            </div>
+    <!-- Enhanced Hero Section -->
+    <section id="home" class="hero enhanced-hero">
+        <div class="hero-background">
+            <canvas id="mathParticles"></canvas>
+            <div class="floating-shapes">
+                <div class="shape shape-1">🔢</div>
+                <div class="shape shape-2">➕</div>
+                <div class="shape shape-3">➖</div>
+                <div class="shape shape-4">✖️</div>
+                <div class="shape shape-5">➗</div>
+                <div class="shape shape-6">⭐</div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    <span>Platform #1 untuk Belajar Matematika</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="title-line">Jadikan Matematika</span>
+                    <span class="title-line highlight">Petualangan Seru!</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Bergabung dengan <strong>50,000+</strong> anak yang sudah jatuh cinta dengan matematika melalui game interaktif, cerita menarik, dan tantangan seru!
+                </p>
+
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Disetujui oleh Ahli Pendidikan</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Akses di Semua Perangkat</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>100% Aman untuk Anak</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        <span>Mulai Petualangan - Gratis!</span>
+                    </button>
+                    <button class="btn-secondary btn-large">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Tonton Demo</span>
+                    </button>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Pelajar Aktif</div>
                         </div>
                     </div>
-                    <div class="welcome-illustration">
-                        <div class="math-char">🧮</div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Game Interaktif</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">4.9/5</div>
+                            <div class="stat-label">Rating Orang Tua</div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Games Grid -->
-            <section class="games-section">
-                <div class="section-header">
-                    <h3>Pilih Petualangan</h3>
-                    <div class="section-actions">
-                        <button class="filter-btn active" data-filter="all">Semua</button>
-                        <button class="filter-btn" data-filter="easy">Mudah</button>
-                        <button class="filter-btn" data-filter="hard">Sulit</button>
-                    </div>
-                </div>
-
-                <div class="games-grid">
-                    <!-- Game 1 -->
-                    <div class="game-card" data-game="arithmetic" data-difficulty="easy">
-                        <div class="game-header">
+            <div class="hero-visual">
+                <div class="floating-game-cards">
+                    <div class="game-card-preview card-1">
+                        <div class="card-header">
+                            <div class="card-badge hot">TERPOPULER</div>
+                        </div>
+                        <div class="card-content">
                             <div class="game-icon">🎯</div>
-                            <div class="game-badge easy">Mudah</div>
-                        </div>
-                        <div class="game-content">
-                            <h4>Aritmatika Cepat</h4>
-                            <p>Uji kecepatan berhitung dengan operasi dasar matematika</p>
+                            <h4>Tembak Angka</h4>
                             <div class="game-stats">
-                                <div class="game-stat">
-                                    <span>⭐ 4.8</span>
-                                </div>
-                                <div class="game-stat">
-                                    <span>👥 1.2k</span>
-                                </div>
+                                <span class="rating">⭐ 4.9</span>
+                                <span class="players">2.3k bermain</span>
                             </div>
                         </div>
-                        <button class="play-btn">
-                            <span>Main Sekarang</span>
-                            <div class="btn-arrow">➡️</div>
-                        </button>
                     </div>
-
-                    <!-- Game 2 -->
-                    <div class="game-card" data-game="geometry" data-difficulty="medium">
-                        <div class="game-header">
-                            <div class="game-icon">🔺</div>
-                            <div class="game-badge medium">Sedang</div>
+                    
+                    <div class="game-card-preview card-2">
+                        <div class="card-header">
+                            <div class="card-badge new">BARU</div>
                         </div>
-                        <div class="game-content">
-                            <h4>Petualangan Geometri</h4>
-                            <p>Jelajahi dunia bentuk dan ruang yang menakjubkan</p>
-                            <div class="game-stats">
-                                <div class="game-stat">
-                                    <span>⭐ 4.6</span>
-                                </div>
-                                <div class="game-stat">
-                                    <span>👥 890</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="play-btn">
-                            <span>Main Sekarang</span>
-                            <div class="btn-arrow">➡️</div>
-                        </button>
-                    </div>
-
-                    <!-- Game 3 -->
-                    <div class="game-card" data-game="fractions" data-difficulty="hard">
-                        <div class="game-header">
-                            <div class="game-icon">🍕</div>
-                            <div class="game-badge hard">Sulit</div>
-                        </div>
-                        <div class="game-content">
-                            <h4>Misteri Pecahan</h4>
-                            <p>Pecahkan teka-teki dunia pecahan yang menantang</p>
-                            <div class="game-stats">
-                                <div class="game-stat">
-                                    <span>⭐ 4.9</span>
-                                </div>
-                                <div class="game-stat">
-                                    <span>👥 567</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="play-btn">
-                            <span>Main Sekarang</span>
-                            <div class="btn-arrow">➡️</div>
-                        </button>
-                    </div>
-
-                    <!-- Game 4 -->
-                    <div class="game-card" data-game="algebra" data-difficulty="hard">
-                        <div class="game-header">
-                            <div class="game-icon">⚡</div>
-                            <div class="game-badge hard">Sulit</div>
-                        </div>
-                        <div class="game-content">
-                            <h4>Aljabar Master</h4>
-                            <p>Taklukkan tantangan persamaan dan variabel</p>
-                            <div class="game-stats">
-                                <div class="game-stat">
-                                    <span>⭐ 4.7</span>
-                                </div>
-                                <div class="game-stat">
-                                    <span>👥 723</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="play-btn">
-                            <span>Main Sekarang</span>
-                            <div class="btn-arrow">➡️</div>
-                        </button>
-                    </div>
-
-                    <!-- Game 5 -->
-                    <div class="game-card" data-game="logic" data-difficulty="medium">
-                        <div class="game-header">
+                        <div class="card-content">
                             <div class="game-icon">🧩</div>
-                            <div class="game-badge medium">Sedang</div>
-                        </div>
-                        <div class="game-content">
-                            <h4>Logika Matematika</h4>
-                            <p>Asah otak dengan puzzle dan teka-teki logika</p>
+                            <h4>Puzzle Matematika</h4>
                             <div class="game-stats">
-                                <div class="game-stat">
-                                    <span>⭐ 4.8</span>
-                                </div>
-                                <div class="game-stat">
-                                    <span>👥 1.5k</span>
+                                <span class="rating">⭐ 4.8</span>
+                                <span class="players">1.8k bermain</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card-preview card-3">
+                        <div class="card-content">
+                            <div class="game-icon">🏆</div>
+                            <h4>Leaderboard</h4>
+                            <div class="ranking">
+                                <div class="rank-item">
+                                    <span>1. Sarah</span>
+                                    <span>⭐ 2,450</span>
                                 </div>
                             </div>
                         </div>
-                        <button class="play-btn">
-                            <span>Main Sekarang</span>
-                            <div class="btn-arrow">➡️</div>
+                    </div>
+                </div>
+                
+                <div class="main-character">
+                    <div class="character-animation">
+                        <div class="character">🤖</div>
+                        <div class="speech-bubble">
+                            Ayo belajar sambil bermain!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-badges">
+        <div class="container">
+            <p>Dipercaya oleh sekolah dan orang tua di seluruh Indonesia</p>
+            <div class="badges">
+                <div class="badge">
+                    <i class="fas fa-school"></i>
+                    <span>500+ Sekolah</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-user-friends"></i>
+                    <span>10K+ Guru</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-home"></i>
+                    <span>50K+ Keluarga</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-globe-asia"></i>
+                    <span>5 Negara</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Games Section -->
+    <section id="games" class="games-section enhanced-games">
+        <div class="container">
+            <div class="section-header enhanced-header">
+                <div class="header-content">
+                    <h2 class="section-title">Koleksi Permainan Matematika</h2>
+                    <p class="section-subtitle">Jelajahi ratusan game edukasi yang disesuaikan dengan usia dan kemampuan</p>
+                </div>
+                <div class="header-actions">
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
                         </button>
                     </div>
+                    <div class="filter-controls">
+                        <select class="filter-select">
+                            <option>Semua Kategori</option>
+                            <option>Angka & Berhitung</option>
+                            <option>Operasi Matematika</option>
+                            <option>Geometri & Bentuk</option>
+                            <option>Logika & Puzzle</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Semua Usia</option>
+                            <option>4-6 Tahun</option>
+                            <option>7-9 Tahun</option>
+                            <option>10-12 Tahun</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Game 6 -->
-                    <div class="game-card" data-game="memory" data-difficulty="easy">
-                        <div class="game-header">
-                            <div class="game-icon">🎮</div>
-                            <div class="game-badge easy">Mudah</div>
+            <!-- Enhanced Categories -->
+            <div class="categories-enhanced">
+                <div class="category-slider">
+                    <button class="category-card active" data-category="all">
+                        <div class="category-icon">
+                            <i class="fas fa-star"></i>
                         </div>
-                        <div class="game-content">
-                            <h4>Memori Angka</h4>
-                            <p>Test ingatanmu dengan pola angka yang menantang</p>
-                            <div class="game-stats">
-                                <div class="game-stat">
-                                    <span>⭐ 4.5</span>
+                        <span>Semua</span>
+                    </button>
+                    <button class="category-card" data-category="numbers">
+                        <div class="category-icon">
+                            <i class="fas fa-sort-numeric-up"></i>
+                        </div>
+                        <span>Angka</span>
+                    </button>
+                    <button class="category-card" data-category="addition">
+                        <div class="category-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <span>Penjumlahan</span>
+                    </button>
+                    <button class="category-card" data-category="subtraction">
+                        <div class="category-icon">
+                            <i class="fas fa-minus-circle"></i>
+                        </div>
+                        <span>Pengurangan</span>
+                    </button>
+                    <button class="category-card" data-category="multiplication">
+                        <div class="category-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <span>Perkalian</span>
+                    </button>
+                    <button class="category-card" data-category="geometry">
+                        <div class="category-icon">
+                            <i class="fas fa-shapes"></i>
+                        </div>
+                        <span>Geometri</span>
+                    </button>
+                    <button class="category-card" data-category="puzzle">
+                        <div class="category-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <span>Puzzle</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Enhanced Games Grid -->
+            <div class="games-grid enhanced-grid" id="gamesGrid">
+                <!-- Game cards will be populated by JavaScript -->
+            </div>
+
+            <!-- Load More -->
+            <div class="load-more-section">
+                <button class="btn-load-more">
+                    <i class="fas fa-redo"></i>
+                    <span>Muat Lebih Banyak Permainan</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section id="curriculum" class="curriculum-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Kurikulum Berstandar Internasional</h2>
+                <p class="section-subtitle">Dirancang oleh ahli pendidikan untuk memastikan perkembangan optimal</p>
+            </div>
+            
+            <div class="curriculum-tabs">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="preschool">Pra-Sekolah (4-6)</button>
+                    <button class="tab-btn" data-tab="elementary">SD Kelas 1-3 (7-9)</button>
+                    <button class="tab-btn" data-tab="advanced">SD Kelas 4-6 (10-12)</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="preschool">
+                        <div class="curriculum-grid">
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-sort-numeric-down"></i>
                                 </div>
-                                <div class="game-stat">
-                                    <span>👥 2.1k</span>
+                                <h4>Pengenalan Angka</h4>
+                                <p>Mengenal angka 1-20, urutan, dan konsep jumlah</p>
+                                <div class="skills">
+                                    <span class="skill">Angka 1-10</span>
+                                    <span class="skill">Menghitung Benda</span>
+                                    <span class="skill">Urutan Angka</span>
+                                </div>
+                            </div>
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-shapes"></i>
+                                </div>
+                                <h4>Bentuk & Pola</h4>
+                                <p>Mengenal bentuk geometri dan pola sederhana</p>
+                                <div class="skills">
+                                    <span class="skill">Bentuk Dasar</span>
+                                    <span class="skill">Pola Warna</span>
+                                    <span class="skill">Sortir Benda</span>
+                                </div>
+                            </div>
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <h4>Perbandingan</h4>
+                                <p>Konsep lebih besar, lebih kecil, dan sama dengan</p>
+                                <div class="skills">
+                                    <span class="skill">Besar-Kecil</span>
+                                    <span class="skill">Panjang-Pendek</span>
+                                    <span class="skill">Berat-Ringan</span>
                                 </div>
                             </div>
                         </div>
-                        <button class="play-btn">
-                            <span>Main Sekarang</span>
-                            <div class="btn-arrow">➡️</div>
-                        </button>
+                    </div>
+                    
+                    <div class="tab-pane" id="elementary">
+                        <div class="curriculum-grid">
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <h4>Operasi Dasar</h4>
+                                <p>Penjumlahan dan pengurangan dengan bilangan hingga 100</p>
+                                <div class="skills">
+                                    <span class="skill">Penjumlahan</span>
+                                    <span class="skill">Pengurangan</span>
+                                    <span class="skill">Soal Cerita</span>
+                                </div>
+                            </div>
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                                <h4>Perkalian Dasar</h4>
+                                <p>Konsep perkalian dan tabel perkalian sederhana</p>
+                                <div class="skills">
+                                    <span class="skill">Tabel 1-5</span>
+                                    <span class="skill">Konsep Kelipatan</span>
+                                    <span class="skill">Perkalian Sederhana</span>
+                                </div>
+                            </div>
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-divide"></i>
+                                </div>
+                                <h4>Pembagian Dasar</h4>
+                                <p>Pengenalan konsep pembagian dan pembagian sederhana</p>
+                                <div class="skills">
+                                    <span class="skill">Konsep Pembagian</span>
+                                    <span class="skill">Pembagian Sederhana</span>
+                                    <span class="skill">Kelompok Benda</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="advanced">
+                        <div class="curriculum-grid">
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-fraction"></i>
+                                </div>
+                                <h4>Pecahan & Desimal</h4>
+                                <p>Memahami konsep pecahan, desimal, dan persentase</p>
+                                <div class="skills">
+                                    <span class="skill">Pecahan Sederhana</span>
+                                    <span class="skill">Desimal</span>
+                                    <span class="skill">Persentase</span>
+                                </div>
+                            </div>
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-ruler-combined"></i>
+                                </div>
+                                <h4>Geometri Lanjutan</h4>
+                                <p>Konsep luas, keliling, volume, dan simetri</p>
+                                <div class="skills">
+                                    <span class="skill">Luas & Keliling</span>
+                                    <span class="skill">Volume</span>
+                                    <span class="skill">Simetri</span>
+                                </div>
+                            </div>
+                            <div class="curriculum-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h4>Logika Matematika</h4>
+                                <p>Pemecahan masalah dan penalaran logis</p>
+                                <div class="skills">
+                                    <span class="skill">Problem Solving</span>
+                                    <span class="skill">Pola & Urutan</span>
+                                    <span class="skill">Logika</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Leaderboard Section -->
-            <section class="leaderboard-section">
-                <div class="section-header">
-                    <h3>Papan Peringkat</h3>
-                    <button class="view-all-btn">Lihat Semua</button>
-                </div>
-                <div class="leaderboard-card">
-                    <div class="leaderboard-list" id="leaderboardList">
-                        <!-- Leaderboard items will be loaded here -->
+    <!-- Progress Tracking -->
+    <section id="progress" class="progress-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Pantau Perkembangan Belajar</h2>
+                <p class="section-subtitle">Analisis detail dan rekomendasi personalized untuk setiap anak</p>
+            </div>
+            
+            <div class="progress-dashboard">
+                <div class="progress-cards">
+                    <div class="progress-card">
+                        <div class="progress-header">
+                            <h4>Kemampuan Angka</h4>
+                            <div class="progress-score">85%</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <div class="progress-details">
+                            <div class="detail">
+                                <span>Pengenalan Angka</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="detail">
+                                <span>Penjumlahan Dasar</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="detail">
+                                <span>Pengurangan Dasar</span>
+                                <span>75%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-card">
+                        <div class="progress-header">
+                            <h4>Pemecahan Masalah</h4>
+                            <div class="progress-score">78%</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 78%"></div>
+                        </div>
+                        <div class="progress-details">
+                            <div class="detail">
+                                <span>Logika</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="detail">
+                                <span>Pola</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="detail">
+                                <span>Problem Solving</span>
+                                <span>60%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-card">
+                        <div class="progress-header">
+                            <h4>Kemampuan Geometri</h4>
+                            <div class="progress-score">72%</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 72%"></div>
+                        </div>
+                        <div class="progress-details">
+                            <div class="detail">
+                                <span>Bentuk Dasar</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="detail">
+                                <span>Pola & Simetri</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="detail">
+                                <span>Pengukuran</span>
+                                <span>58%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
+                
+                <div class="achievements">
+                    <h4>Pencapaian Terbaru</h4>
+                    <div class="achievement-list">
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="achievement-content">
+                                <h5>Master Angka</h5>
+                                <p>Menyelesaikan semua level pengenalan angka</p>
+                                <span class="achievement-time">2 hari lalu</span>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="achievement-content">
+                                <h5>Streak 7 Hari</h5>
+                                <p>Belajar selama 7 hari berturut-turut</p>
+                                <span class="achievement-time">1 minggu lalu</span>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="achievement-content">
+                                <h5>Pecahan Expert</h5>
+                                <p>Menyelesaikan level pecahan tingkat lanjut</p>
+                                <span class="achievement-time">3 hari lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <button class="nav-item active" data-target="home">
-                <div class="nav-icon">🏠</div>
-                <span>Home</span>
-            </button>
-            <button class="nav-item" data-target="games">
-                <div class="nav-icon">🎮</div>
-                <span>Games</span>
-            </button>
-            <button class="nav-item" data-target="leaderboard">
-                <div class="nav-icon">🏆</div>
-                <span>Peringkat</span>
-            </button>
-            <button class="nav-item" data-target="profile">
-                <div class="nav-icon">👤</div>
-                <span>Profil</span>
-            </button>
-        </nav>
-    </div>
+    <!-- Parents Section -->
+    <section id="parents" class="parents-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Untuk Orang Tua & Guru</h2>
+                <p class="section-subtitle">Alat dan resources untuk mendukung proses belajar anak</p>
+            </div>
+            
+            <div class="parents-grid">
+                <div class="parent-card">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4>Laporan Detail</h4>
+                    <p>Akses laporan mingguan dan bulanan tentang perkembangan belajar anak dengan analisis mendalam dan rekomendasi personalized</p>
+                    <button class="btn-outline">
+                        <i class="fas fa-download"></i>
+                        <span>Contoh Laporan</span>
+                    </button>
+                </div>
+                
+                <div class="parent-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h4>Kontrol Orang Tua</h4>
+                    <p>Atur waktu bermain, batasi konten, pantau aktivitas, dan kelola progress belajar anak dengan kontrol yang lengkap</p>
+                    <button class="btn-outline">
+                        <i class="fas fa-cog"></i>
+                        <span>Pengaturan</span>
+                    </button>
+                </div>
+                
+                <div class="parent-card">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Resources Guru</h4>
+                    <p>RPP lengkap, worksheet printable, materi ajar digital, dan panduan mengajar yang bisa diunduh gratis</p>
+                    <button class="btn-outline">
+                        <i class="fas fa-download"></i>
+                        <span>Download Materials</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Game Screen -->
-    <div id="gameScreen" class="screen">
-        <!-- Game content will be loaded here -->
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Siap Memulai Perjalanan Matematika?</h2>
+                <p>Bergabunglah dengan komunitas belajar terbesar di Indonesia dan buktikan sendiri keajaiban belajar matematika yang menyenangkan!</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary btn-xlarge">
+                        <i class="fas fa-rocket"></i>
+                        <span>Daftar Sekarang - Gratis Selamanya!</span>
+                    </button>
+                    <button class="btn-secondary btn-large">
+                        <i class="fas fa-comments"></i>
+                        <span>Konsultasi dengan Expert</span>
+                    </button>
+                </div>
+                <div class="cta-guarantee">
+                    <div class="guarantee-item">
+                        <i class="fas fa-shield-check"></i>
+                        <span>Garansi 30 hari uang kembali</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-lock"></i>
+                        <span>100% privasi terjaga</span>
+                    </div>
+                    <div class="guarantee-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Support 24/7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer enhanced-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <div class="logo-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <div class="logo-text">
+                                <h3>MathFun</h3>
+                                <span>Membuat matematika menyenangkan</span>
+                            </div>
+                        </div>
+                        <p>Platform belajar matematika interaktif #1 untuk anak Indonesia usia 4-12 tahun. Mengubah pembelajaran menjadi petualangan yang tak terlupakan.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="link-group">
+                            <h4>Produk</h4>
+                            <a href="#">Semua Permainan</a>
+                            <a href="#">Kurikulum</a>
+                            <a href="#">Untuk Sekolah</a>
+                            <a href="#">Harga</a>
+                            <a href="#">Testimoni</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Resources</h4>
+                            <a href="#">Blog Edukasi</a>
+                            <a href="#">Worksheet Gratis</a>
+                            <a href="#">RPP & Silabus</a>
+                            <a href="#">Research & Studi</a>
+                            <a href="#">Tips Belajar</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Perusahaan</h4>
+                            <a href="#">Tentang Kami</a>
+                            <a href="#">Karir</a>
+                            <a href="#">Partner</a>
+                            <a href="#">Press Kit</a>
+                            <a href="#">Kontak Media</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Support</h4>
+                            <a href="#">Pusat Bantuan</a>
+                            <a href="#">Kontak Kami</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Kebijakan Cookie</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <div class="newsletter-content">
+                        <h4>Tetap Terupdate</h4>
+                        <p>Dapatkan tips belajar terbaru, update fitur, dan penawaran spesial langsung di email Anda</p>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Masukkan email Anda">
+                            <button class="btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Subscribe</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    <p>&copy; 2024 MathFun. All rights reserved. Made with <i class="fas fa-heart"></i> for Indonesia's education</p>
+                    <div class="certifications">
+                        <span class="certification">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>COPPA Compliant</span>
+                        </span>
+                        <span class="certification">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Education Certified</span>
+                        </span>
+                        <span class="certification">
+                            <i class="fas fa-lock"></i>
+                            <span>Data Privacy</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-actions">
+        <button class="fab main-fab">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="fab-tooltip">Butuh bantuan?</div>
     </div>
 
     <script src="index.js"></script>
