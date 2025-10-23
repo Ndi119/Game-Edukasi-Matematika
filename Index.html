@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathQuest - Game Matematika Seru</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="screen active">
+        <div class="loading-container">
+            <div class="loading-animation">
+                <div class="math-symbol">➗</div>
+                <div class="math-symbol">✖️</div>
+                <div class="math-symbol">➕</div>
+                <div class="math-symbol">➖</div>
+            </div>
+            <h1>MathQuest</h1>
+            <p>Memuat petualangan matematika...</p>
+        </div>
+    </div>
+
+    <!-- Auth Screen -->
+    <div id="authScreen" class="screen">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>MathQuest</h1>
+                    <p>Petualangan Matematika Menanti!</p>
+                </div>
+
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Masuk</button>
+                    <button class="auth-tab" data-tab="register">Daftar</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <div class="input-group">
+                        <input type="email" id="loginEmail" placeholder=" " required>
+                        <label for="loginEmail">Email</label>
+                        <div class="input-icon">📧</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" id="loginPassword" placeholder=" " required>
+                        <label for="loginPassword">Password</label>
+                        <div class="input-icon">🔒</div>
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        <span class="btn-text">Masuk ke Petualangan</span>
+                        <div class="btn-loader"></div>
+                    </button>
+
+                    <div class="auth-links">
+                        <a href="#" class="forgot-password">Lupa password?</a>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" class="auth-form">
+                    <div class="input-group">
+                        <input type="text" id="registerName" placeholder=" " required>
+                        <label for="registerName">Nama Lengkap</label>
+                        <div class="input-icon">👤</div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" id="registerEmail" placeholder=" " required>
+                        <label for="registerEmail">Email</label>
+                        <div class="input-icon">📧</div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" id="registerPassword" placeholder=" " required>
+                        <label for="registerPassword">Password</label>
+                        <div class="input-icon">🔒</div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" id="registerConfirmPassword" placeholder=" " required>
+                        <label for="registerConfirmPassword">Konfirmasi Password</label>
+                        <div class="input-icon">✅</div>
+                    </div>
+
+                    <div class="terms">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <label for="agreeTerms">Saya setuju dengan <a href="#">Syarat & Ketentuan</a></label>
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        <span class="btn-text">Mulai Petualangan</span>
+                        <div class="btn-loader"></div>
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Dengan mendaftar, kamu menyetujui petualangan matematika yang seru!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Menu Screen -->
+    <div id="mainMenu" class="screen">
+        <!-- Animated Background -->
+        <div class="animated-bg">
+            <div class="floating-shape shape-1">🔺</div>
+            <div class="floating-shape shape-2">🔵</div>
+            <div class="floating-shape shape-3">⭐</div>
+            <div class="floating-shape shape-4">🔶</div>
+        </div>
+
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>MathQuest</h1>
+                    <span class="subtitle">Petualangan Matematika</span>
+                </div>
+                
+                <div class="user-profile">
+                    <div class="profile-info">
+                        <div class="avatar" id="userAvatar">👤</div>
+                        <div class="user-details">
+                            <span class="user-name" id="userName">Player</span>
+                            <span class="user-level">Level: <span id="userLevel">1</span></span>
+                        </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="userScore">0</span>
+                            <span class="stat-label">Poin</span>
+                        </div>
+                        <button id="logoutBtn" class="logout-btn">🚪</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <div class="welcome-content">
+                        <h2>Selamat Datang, <span id="welcomeName">Petualang</span>! 👋</h2>
+                        <p>Siap untuk tantangan matematika hari ini?</p>
+                        <div class="daily-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="dailyPlayed">0</span>
+                                <span class="stat-text">Dimainkan Hari Ini</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="dailyScore">0</span>
+                                <span class="stat-text">Poin Hari Ini</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="welcome-illustration">
+                        <div class="math-char">🧮</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Games Grid -->
+            <section class="games-section">
+                <div class="section-header">
+                    <h3>Pilih Petualangan</h3>
+                    <div class="section-actions">
+                        <button class="filter-btn active" data-filter="all">Semua</button>
+                        <button class="filter-btn" data-filter="easy">Mudah</button>
+                        <button class="filter-btn" data-filter="hard">Sulit</button>
+                    </div>
+                </div>
+
+                <div class="games-grid">
+                    <!-- Game 1 -->
+                    <div class="game-card" data-game="arithmetic" data-difficulty="easy">
+                        <div class="game-header">
+                            <div class="game-icon">🎯</div>
+                            <div class="game-badge easy">Mudah</div>
+                        </div>
+                        <div class="game-content">
+                            <h4>Aritmatika Cepat</h4>
+                            <p>Uji kecepatan berhitung dengan operasi dasar matematika</p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <span>⭐ 4.8</span>
+                                </div>
+                                <div class="game-stat">
+                                    <span>👥 1.2k</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="play-btn">
+                            <span>Main Sekarang</span>
+                            <div class="btn-arrow">➡️</div>
+                        </button>
+                    </div>
+
+                    <!-- Game 2 -->
+                    <div class="game-card" data-game="geometry" data-difficulty="medium">
+                        <div class="game-header">
+                            <div class="game-icon">🔺</div>
+                            <div class="game-badge medium">Sedang</div>
+                        </div>
+                        <div class="game-content">
+                            <h4>Petualangan Geometri</h4>
+                            <p>Jelajahi dunia bentuk dan ruang yang menakjubkan</p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <span>⭐ 4.6</span>
+                                </div>
+                                <div class="game-stat">
+                                    <span>👥 890</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="play-btn">
+                            <span>Main Sekarang</span>
+                            <div class="btn-arrow">➡️</div>
+                        </button>
+                    </div>
+
+                    <!-- Game 3 -->
+                    <div class="game-card" data-game="fractions" data-difficulty="hard">
+                        <div class="game-header">
+                            <div class="game-icon">🍕</div>
+                            <div class="game-badge hard">Sulit</div>
+                        </div>
+                        <div class="game-content">
+                            <h4>Misteri Pecahan</h4>
+                            <p>Pecahkan teka-teki dunia pecahan yang menantang</p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <span>⭐ 4.9</span>
+                                </div>
+                                <div class="game-stat">
+                                    <span>👥 567</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="play-btn">
+                            <span>Main Sekarang</span>
+                            <div class="btn-arrow">➡️</div>
+                        </button>
+                    </div>
+
+                    <!-- Game 4 -->
+                    <div class="game-card" data-game="algebra" data-difficulty="hard">
+                        <div class="game-header">
+                            <div class="game-icon">⚡</div>
+                            <div class="game-badge hard">Sulit</div>
+                        </div>
+                        <div class="game-content">
+                            <h4>Aljabar Master</h4>
+                            <p>Taklukkan tantangan persamaan dan variabel</p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <span>⭐ 4.7</span>
+                                </div>
+                                <div class="game-stat">
+                                    <span>👥 723</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="play-btn">
+                            <span>Main Sekarang</span>
+                            <div class="btn-arrow">➡️</div>
+                        </button>
+                    </div>
+
+                    <!-- Game 5 -->
+                    <div class="game-card" data-game="logic" data-difficulty="medium">
+                        <div class="game-header">
+                            <div class="game-icon">🧩</div>
+                            <div class="game-badge medium">Sedang</div>
+                        </div>
+                        <div class="game-content">
+                            <h4>Logika Matematika</h4>
+                            <p>Asah otak dengan puzzle dan teka-teki logika</p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <span>⭐ 4.8</span>
+                                </div>
+                                <div class="game-stat">
+                                    <span>👥 1.5k</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="play-btn">
+                            <span>Main Sekarang</span>
+                            <div class="btn-arrow">➡️</div>
+                        </button>
+                    </div>
+
+                    <!-- Game 6 -->
+                    <div class="game-card" data-game="memory" data-difficulty="easy">
+                        <div class="game-header">
+                            <div class="game-icon">🎮</div>
+                            <div class="game-badge easy">Mudah</div>
+                        </div>
+                        <div class="game-content">
+                            <h4>Memori Angka</h4>
+                            <p>Test ingatanmu dengan pola angka yang menantang</p>
+                            <div class="game-stats">
+                                <div class="game-stat">
+                                    <span>⭐ 4.5</span>
+                                </div>
+                                <div class="game-stat">
+                                    <span>👥 2.1k</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="play-btn">
+                            <span>Main Sekarang</span>
+                            <div class="btn-arrow">➡️</div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboard Section -->
+            <section class="leaderboard-section">
+                <div class="section-header">
+                    <h3>Papan Peringkat</h3>
+                    <button class="view-all-btn">Lihat Semua</button>
+                </div>
+                <div class="leaderboard-card">
+                    <div class="leaderboard-list" id="leaderboardList">
+                        <!-- Leaderboard items will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="home">
+                <div class="nav-icon">🏠</div>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" data-target="games">
+                <div class="nav-icon">🎮</div>
+                <span>Games</span>
+            </button>
+            <button class="nav-item" data-target="leaderboard">
+                <div class="nav-icon">🏆</div>
+                <span>Peringkat</span>
+            </button>
+            <button class="nav-item" data-target="profile">
+                <div class="nav-icon">👤</div>
+                <span>Profil</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <!-- Game content will be loaded here -->
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
